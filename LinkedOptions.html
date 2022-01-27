@@ -1,0 +1,179 @@
+{% assign link = false %}
+
+
+{% if product.tags contains "linkExample" %}
+{% assign link = true %}
+<label>Link Example</label><br>
+  <select required class="required a type" id="LinkExample" name="properties[LinkExample]">
+    <option value="Choice A"columnsrc="linkToChoiceAImage.png">Choice A</option>
+    <option value="Choice B" columnsrc="linkToChoiceBImage.png">Choice B</option>
+    <option value="Choice C" columnsrc="linkToChoiceCImage.png">Choice C</option>
+  </select>
+<br>
+
+{% endif %}
+
+
+{% if link == true %}
+
+<div class="customoption" style="display:none; background:#fff; border-radius:7px; padding:5px; padding-top:10px; text-align:center;">
+  <p>Additionally upload logo/image after checkout or attach it in an email.</p>
+</div>
+
+<div class="logodisplay" style="display:none;">
+	<img src="" class="chosenlogo" style="width:auto;height:150px;padding:5px;text-align:center;border-radius:15px;">
+</div>
+
+{% endif %}
+
+
+
+{% if link == true %}
+
+<div class="columndisplay" style="display:none;">
+	<img src="" class="chosencolumn" style="width:auto;height:200px;padding:5px;text-align:center;border-radius:15px;">
+</div>
+
+
+<p class="line-item-property__field" style="display:none">
+  	<input id="additionalsku" name="null" type="text">
+</p>
+
+
+<script>
+  
+  	$(function() {
+
+  	
+      
+      	var selection = $("select.a").val().toString().toLowerCase();
+      	var sellogosrc = (("https://cdn.shopify.com/s/files/1/0173/9894/files/") + $(".logo option:selected").attr("logosrc"));
+      	var selcolumnsrc = (("https://cdn.shopify.com/s/files/1/0173/9894/files/") + $(".column option:selected").attr("columnsrc"));
+      
+      if ($(".logo option:selected").attr("logosrc") !== undefined) {
+             $( ".logodisplay" ).show();
+      } else {
+              $( ".logodisplay" ).hide();
+      }
+      
+      if ($(".column option:selected").attr("columnsrc") !== undefined) {
+             $( ".columndisplay" ).show();
+      } else {
+              $( ".columndisplay" ).hide();
+      }
+
+      
+      	$(".chosenlogo").attr("src", sellogosrc);
+      	$(".chosencolumn").attr("src", selcolumnsrc);
+      
+      	if ( ($("select.logo").val()) == "Custom Logo") {
+          $( ".customoption" ).show();
+        } else {
+          $( ".customoption" ).hide();
+        }
+      
+      
+  	    $(".owl-item a img").each(function() {
+  	        if ($(this).attr("alt").toLowerCase().includes(selection) == true ) {
+
+  	            $('.active-img').removeClass("active-img");
+  	            $(this).parent().addClass("active-img");
+
+  	            var imgsrcmain = $(this).attr("src");
+  	            var imgsrczoom = $(this).attr("src");
+
+  	            imgsrcmain = imgsrcmain.replace("_compact", "_large");
+  	            imgsrczoom = imgsrczoom.replace("_compact", "");
+
+  	            $("img.featured").attr("src", imgsrcmain);
+  	            $("img.zoomImg").attr("src", imgsrczoom);
+  	        }
+  	    })
+
+  	    $("#additionalsku").attr('name', 'properties[_' + ($('select.a').val()) + '_SKU]')
+
+  	    if ($('option:selected', this).attr('sku') == null) {
+
+  	        $("#additionalsku").val(selection);
+
+  	    } else {
+
+  	        $("#additionalsku").val("x" + $('option:selected', this).attr('sku'));
+
+  	    }
+
+  	})
+
+  	/*-----------------------------------------------------------------------------------------------------------*/
+
+  	$("select").change(function() {
+      	var selection = $("select.a").val().toString().toLowerCase();
+      	var sellogosrc = (("https://cdn.shopify.com/s/files/1/0173/9894/files/") + $(".logo option:selected").attr('logosrc'));
+      	var selcolumnsrc = (("https://cdn.shopify.com/s/files/1/0173/9894/files/") + $(".column option:selected").attr('columnsrc'));
+            
+      
+      if ($(".logo option:selected").attr("logosrc") !== undefined) {
+             $( ".logodisplay" ).show();
+      } else {
+              $( ".logodisplay" ).hide();
+      }
+      
+      if ($(".column option:selected").attr("columnsrc") !== undefined) {
+             $( ".columndisplay" ).show();
+      } else {
+              $( ".columndisplay" ).hide();
+      }
+      
+      
+      $(".chosenlogo").attr("src", sellogosrc);
+      	$(".chosencolumn").attr("src", selcolumnsrc);
+      
+      
+      	if ( ($("select.logo").val()) == "Custom Logo") {
+          $( ".customoption" ).show();
+        } else {
+          $( ".customoption" ).hide();
+        }
+
+      	
+      	
+      
+  	    $(".owl-item a img").each(function() {
+  	        if ($(this).attr("alt").toLowerCase() == selection) {
+
+  	            $('.active-img').removeClass("active-img");
+  	            $(this).parent().addClass("active-img");
+
+  	            var imgsrcmain = $(this).attr("src");
+  	            var imgsrczoom = $(this).attr("src");
+
+  	            imgsrcmain = imgsrcmain.replace("_compact", "_large");
+  	            imgsrczoom = imgsrczoom.replace("_compact", "");
+
+  	            $("img.featured").attr("src", imgsrcmain);
+  	            $("img.zoomImg").attr("src", imgsrczoom);
+  	        }
+  	    })
+
+  	    $("#additionalsku").attr('name', 'properties[_' + ($('select.a').val()) + '_SKU]')
+
+  	    if ($('option:selected', this).attr('sku') == null) {
+
+  	        $("#additionalsku").val(selection);
+
+  	    } else {
+
+  	        $("#additionalsku").val("x" + $('option:selected', this).attr('sku'));
+
+  	    }
+
+      
+      
+  	})
+</script>
+{% endif %}
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+  crossorigin="anonymous"></script>
