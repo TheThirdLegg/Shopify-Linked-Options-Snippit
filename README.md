@@ -1,5 +1,7 @@
-# Linked-Options-Snippit
-Linked Options Snippit
+# Shopify Linked-Options-Snippit
+Shopify Linked Options Snippit
+
+Reqires JQuery
 
 Example of a linked option based on a column that links via a schoppy tag
 Example of display the supplied url of the chosen selection as an image
