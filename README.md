@@ -1,4 +1,4 @@
-# Shopify Linked-Options-Snippit
+# Shopify Linked Options Snippit
 Shopify Linked Options Snippit
 
 Reqires JQuery
